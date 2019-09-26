@@ -1,16 +1,21 @@
-$(document).ready(function(){
+//$(document).ready(function(){
 
-getWeather();
-})
+//getWeather();
+//})
 
 
-function getWeather (){
+function getWeather (searchQuery){
 
-  var url = "https://api.openweathermap.org/data/2.5/weather?zip=65453,us&units=imperial&APPID="+apiKey;
+  $(".city").text("");
+  $(".temp").text("");
+
+  var url ="https://api.openweathermap.org/data/2.5/weather?q="+searchQuery+"&units=imperial&APPID="+apiKey;
   
   $.ajax(url,{success:function(data){
     $(".city").text(data.name);
     $(".temp").text(data.main.temp);
+  }, error:function(error){
+    $(".errormessage").text("An error has occured");
   }})
 
 
@@ -25,6 +30,9 @@ function showPicture(){
 
   // jQuery can do a lot of crazy stuff, so make sure to Google around to find out more
   
+}
 
-
+function searchWeather(){
+  var searchQuery = $(".search").val();
+  getWeather(searchQuery);
 }
