@@ -3,6 +3,10 @@
 //getWeather();
 //})
 
+$(document).ready(function(){
+  getPosts();
+})
+
 function handleSignIn(){
   var provider = new firebase.auth.GoogleAuthProvider();
 
@@ -58,4 +62,49 @@ function showPicture(){
 function searchWeather(){
   var searchQuery = $(".search").val();
   getWeather(searchQuery);
+}
+
+function addMessage(postTitle,postBody){
+  var postData = {
+    title: postTitle,
+    body: postBody
+  }
+
+  // Get a reference to the database service
+  var database = firebase.database().ref("posts");
+
+  // Create a new post reference with an auto-generated id
+  var newPostRef = database.push();
+  newPostRef.set(postData, function(error) {
+    if (error) {
+      // The write failed...
+    } else {
+      // Data saved successfully!
+
+      window.location.reload();
+    }
+  });
+
+}
+
+
+function handleMessageFormSubmit(){
+
+  var postTitle = $("#post-title").val();
+  var postBody = $("#post-body").val();
+  addMessage(postTitle,postBody);
+}
+
+function getPosts(){
+
+  return firebase.database().ref("posts").once('value').then(function (snapshot) {
+    var posts = snapshot.val();
+    console.log(posts);
+
+    for (var postKey in posts){
+      var post = posts[postKey];
+      $("#post-listing").append("<div>"+post.title+" - "+post.body+"</div>");
+    }
+  });
+
 }

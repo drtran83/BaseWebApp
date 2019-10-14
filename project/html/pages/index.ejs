@@ -12,17 +12,31 @@
   
     <h1>Hello World!</h1>
   </div>
-
+<!---
   <p>Click on the button for a surprise.</p>
 
   <button onClick="showPicture()" class="btn btn-dark">Click me</button>
 
-  <div id="image"></div>
+  <div id="image"></div> -->
 
 <div class="loginButton">
-  <button onClick="handleSignIn()">Login</button></div>
+  <button onClick="handleSignIn()">Login</button><br></div>
 
-  
+  <div class="form">
+    <br>
+  <form onSubmit="handleMessageFormSubmit()" action="#">
+    Title:<br>
+    <input id="post-title"><br>
+    Body:<br>
+    <textarea id="post-body"></textarea><br>
+    <button>Submit</button>
+
+  </form>
+  </div>
+
+  <div id="post-listing"></div>
+
+  <!--
   <input class="search" type="text" placeholder="Enter city name">
   <button type="button" onClick="searchWeather()">Search</button>
   <div class="errormessage" style="margin-top: 20px;">
@@ -35,7 +49,7 @@
 
   <div class="temp">
 
-  </div>
+  </div> -->
 
 
 </body>
